@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deograce Kasonga — Informaticien | Systèmes d'information &amp; opérations</title>
+<meta name="description" content="Portfolio de Deograce Kasonga, informaticien spécialisé en conception des systèmes d'information, gestion opérationnelle et coordination des stocks — Kimpese, RDC.">
+<meta property="og:title" content="Deograce Kasonga — Informaticien">
+<meta property="og:description" content="Systèmes d'information, gestion opérationnelle et coordination des stocks.">
+<meta property="og:image" content="assets/dashboard-projet.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%231C4A40'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%23F6F4EE' font-family='serif'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE;
+    --ink:#1C2B2A;
+    --ink-soft:#4A5957;
+    --line:#D8D3C4;
+    --teal:#2F6B5E;
+    --teal-deep:#1C4A40;
+    --card:#FFFFFF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 32px;}
+
+  /* ===== Nav ===== */
+  nav{
+    position:sticky; top:0; z-index:20;
+    background:rgba(246,244,238,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; justify-content:space-between; align-items:center;
+    height:64px;
+  }
+  nav .brand{font-family:'Fraunces', serif; font-weight:600; font-size:18px; letter-spacing:0.02em;}
+  nav .brand span{color:var(--teal);}
+  nav ul{list-style:none; display:flex; gap:28px;}
+  nav ul a{
+    font-size:13px; text-transform:uppercase; letter-spacing:0.08em;
+    text-decoration:none; color:var(--ink-soft); font-weight:500;
+    transition:color .15s;
+  }
+  nav ul a:hover, nav ul a:focus-visible{color:var(--teal-deep);}
+
+  .skip-link{
+    position:absolute; left:-9999px; top:0; z-index:100;
+    background:var(--teal-deep); color:var(--paper); padding:12px 20px;
+  }
+  .skip-link:focus{left:16px; top:16px;}
+
+  #nav-check{display:none;}
+  .nav-toggle{
+    display:none; cursor:pointer; width:22px; height:16px;
+    position:relative; background:none; border:none;
+  }
+  .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after{
+    content:""; position:absolute; left:0; width:22px; height:2px;
+    background:var(--ink); transition:transform .2s, opacity .2s;
+  }
+  .nav-toggle span{top:7px;}
+  .nav-toggle span::before{top:-7px;}
+  .nav-toggle span::after{top:7px;}
+  #nav-check:checked ~ nav .nav-toggle span{background:transparent;}
+  #nav-check:checked ~ nav .nav-toggle span::before{transform:rotate(45deg) translate(5px,5px);}
+  #nav-check:checked ~ nav .nav-toggle span::after{transform:rotate(-45deg) translate(5px,-5px);}
+
+  /* ===== Hero ===== */
+  header.hero{
+    padding:88px 0 64px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .boot-line{
+    font-size:13px; color:var(--teal); margin-bottom:22px;
+    display:flex; align-items:center; gap:2px;
+  }
+  .boot-line .cursor{
+    display:inline-block; width:8px; height:15px; background:var(--teal);
+    animation:blink 1.1s steps(1) infinite; margin-left:2px;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  .hero-grid{
+    display:grid; grid-template-columns:1.4fr 1fr; gap:48px; align-items:end;
+  }
+  h1.name{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(42px, 6vw, 68px);
+    line-height:1.02;
+    letter-spacing:-0.01em;
+  }
+  .role{
+    margin-top:14px;
+    font-size:19px;
+    color:var(--ink-soft);
+    max-width:46ch;
+  }
+  .role strong{color:var(--teal-deep); font-weight:600;}
+  .hero-meta{
+    border-left:1px solid var(--line);
+    padding-left:28px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .hero-meta div{margin-bottom:10px;}
+  .hero-meta .k{
+    display:block; text-transform:uppercase; letter-spacing:0.08em;
+    font-size:11px; color:var(--teal); margin-bottom:2px;
+  }
+  .hero-top{display:flex; gap:24px; align-items:center; margin-bottom:28px;}
+  .photo{
+    width:84px; height:84px; border-radius:50%;
+    object-fit:cover; border:2px solid var(--teal);
+    flex-shrink:0;
+  }
+  .cv-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    margin-top:24px; padding:12px 22px;
+    background:var(--teal-deep); color:var(--paper);
+    text-decoration:none; font-size:13.5px; font-weight:500;
+    border-radius:2px; transition:background .15s;
+  }
+  .cv-btn:hover, .cv-btn:focus-visible{background:var(--teal);}
+
+  /* ===== Sections ===== */
+  section{padding:64px 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .eyebrow{
+    font-size:12px; text-transform:uppercase; letter-spacing:0.12em;
+    color:var(--teal); font-weight:500; margin-bottom:8px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::after{content:""; flex:1; height:1px; background:var(--line);}
+  h2{
+    font-family:'Fraunces', serif; font-weight:500;
+    font-size:32px; margin-bottom:32px; letter-spacing:-0.01em;
+  }
+
+  /* Profil / competences */
+  .profile-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:56px;}
+  .profile-grid p{color:var(--ink-soft); font-size:16px; max-width:56ch;}
+  .skills-list{list-style:none; display:flex; flex-direction:column; gap:14px;}
+  .skills-list li{
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:14.5px; border-bottom:1px dashed var(--line); padding-bottom:12px;
+  }
+  .dots{display:flex; gap:5px;}
+  .dot{width:8px; height:8px; border-radius:50%; background:var(--line);}
+  .dot.on{background:var(--teal);}
+  .lang-row{display:flex; justify-content:space-between; font-size:14.5px; margin-bottom:12px;}
+  .lang-row .level{color:var(--teal-deep); font-weight:500;}
+
+  /* Projets */
+  .project{
+    display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:start;
+    background:var(--card); border:1px solid var(--line); border-radius:4px;
+    padding:32px;
+  }
+  .project img{
+    width:100%; border:1px solid var(--line); border-radius:2px; display:block;
+  }
+  .project h3{font-family:'Fraunces', serif; font-weight:500; font-size:22px; margin-bottom:10px;}
+  .project p{color:var(--ink-soft); font-size:14.5px; margin-bottom:16px;}
+  .project ul{padding-left:18px; color:var(--ink-soft); font-size:14.5px; margin-bottom:20px;}
+  .project ul li{margin-bottom:6px;}
+  .kpi-row{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:20px;}
+  .kpi-card{
+    background:var(--paper); border:1px solid var(--line); padding:12px 14px; border-radius:2px;
+  }
+  .kpi-card .val{font-family:'IBM Plex Mono', monospace; font-size:20px; font-weight:500; color:var(--teal-deep);}
+  .kpi-card .lbl{font-size:11.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.04em;}
+  .project-tags{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;}
+  .tag{
+    font-size:11.5px; font-family:'IBM Plex Mono', monospace;
+    border:1px solid var(--line); padding:4px 10px; border-radius:20px; color:var(--ink-soft);
+  }
+  .project-link{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13.5px; font-weight:500; color:var(--teal-deep);
+    text-decoration:none; border-bottom:1px solid var(--teal-deep);
+    padding-bottom:2px;
+  }
+  .project-link:hover{color:var(--teal);}
+
+  /* Experience ledger */
+  .ledger{width:100%; border-collapse:collapse;}
+  .entry{
+    display:grid; grid-template-columns:52px 1fr 130px;
+    gap:24px; padding:26px 0; border-bottom:1px solid var(--line);
+    align-items:start;
+  }
+  .entry:first-child{padding-top:0;}
+  .entry .idx{
+    font-size:12px; color:var(--teal); padding-top:4px;
+  }
+  .entry .role-title{font-size:18px; font-weight:600; margin-bottom:2px;}
+  .entry .org{color:var(--ink-soft); font-size:14px; margin-bottom:12px;}
+  .entry ul{padding-left:18px; color:var(--ink-soft); font-size:14.5px;}
+  .entry ul li{margin-bottom:6px;}
+  .entry .period{
+    font-size:13px; color:var(--ink-soft); text-align:right;
+    padding-top:4px; white-space:nowrap;
+  }
+
+  /* Formation */
+  .edu{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+  .edu-card{
+    background:var(--card); border:1px solid var(--line); border-radius:2px;
+    padding:26px;
+  }
+  .edu-card .period{font-size:12px; color:var(--teal); margin-bottom:10px;}
+  .edu-card h3{font-family:'Fraunces', serif; font-weight:500; font-size:19px; margin-bottom:6px;}
+  .edu-card p{font-size:14px; color:var(--ink-soft);}
+
+  /* Contact */
+  footer{
+    background:var(--teal-deep); color:var(--paper);
+    padding:72px 0 40px;
+  }
+  footer h2{color:var(--paper); margin-bottom:16px;}
+  footer .lede{color:#CFDDD8; max-width:48ch; margin-bottom:36px; font-size:16px;}
+  .contact-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; margin-bottom:56px;
+  }
+  .contact-card{
+    border:1px solid rgba(255,255,255,0.18);
+    padding:20px; border-radius:2px;
+  }
+  .contact-card .k{
+    font-size:11px; text-transform:uppercase; letter-spacing:0.08em;
+    color:#8FBBAE; display:block; margin-bottom:8px;
+  }
+  .contact-card a{text-decoration:none; font-size:15px; word-break:break-word;}
+  .contact-card a:hover{color:#E8C97A;}
+  .foot-bottom{
+    display:flex; justify-content:space-between; align-items:center;
+    border-top:1px solid rgba(255,255,255,0.15); padding-top:24px;
+    font-size:12.5px; color:#8FBBAE; flex-wrap:wrap; gap:12px;
+  }
+
+  @media (max-width:760px){
+    .hero-top{flex-wrap:wrap;}
+    .photo{width:64px; height:64px;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-meta{border-left:none; padding-left:0; border-top:1px solid var(--line); padding-top:20px;}
+    .profile-grid{grid-template-columns:1fr;}
+    .project{grid-template-columns:1fr; padding:22px;}
+    .kpi-row{grid-template-columns:1fr 1fr;}
+    .entry{grid-template-columns:1fr; gap:6px;}
+    .entry .period{text-align:left;}
+    .edu{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .nav-toggle{display:block;}
+    nav ul{
+      position:absolute; top:64px; left:0; right:0;
+      flex-direction:column; gap:0;
+      background:var(--paper); border-bottom:1px solid var(--line);
+      max-height:0; overflow:hidden; transition:max-height .25s ease;
+    }
+    nav ul li{width:100%;}
+    nav ul a{
+      display:block; padding:16px 32px; border-bottom:1px solid var(--line);
+    }
+    #nav-check:checked ~ nav ul{max-height:280px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .cursor{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Aller au contenu</a>
+<input type="checkbox" id="nav-check" aria-hidden="true">
+
+<nav>
+  <div class="wrap">
+    <div class="brand">D. <span>Kasonga</span></div>
+    <ul>
+      <li><a href="#profil">Profil</a></li>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#experiences">Expériences</a></li>
+      <li><a href="#formations">Formations</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <label class="nav-toggle" for="nav-check" aria-label="Ouvrir le menu"><span></span></label>
+  </div>
+</nav>
+
+<header class="hero" id="main">
+  <div class="wrap">
+    <div class="boot-line mono">&gt; systemes_information.init() — Kimpese, Kongo Central<span class="cursor"></span></div>
+    <div class="hero-grid">
+      <div>
+        <div class="hero-top">
+          <img class="photo" src="assets/deograce-photo.jpg" alt="Photo de Deograce Kasonga">
+          <h1 class="name" style="font-size:clamp(32px,5vw,52px);">Deograce Kasonga</h1>
+        </div>
+        <p class="role">Informaticien spécialisé en <strong>conception des systèmes d'information</strong>, avec une expérience de terrain en gestion opérationnelle, stocks et relation fournisseurs.</p>
+        <a class="cv-btn" href="assets/CV_Deograce_Kasonga.pdf" download>↓ Télécharger le CV (PDF)</a>
+      </div>
+      <div class="hero-meta mono">
+        <div><span class="k">Basé à</span>Kimpese, Kongo Central, RDC</div>
+        <div><span class="k">Rôle actuel</span>Shop Manager — Shalina Healthcare</div>
+        <div><span class="k">Langues</span>FR · EN · PT</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="profil">
+  <div class="wrap">
+    <div class="eyebrow">Profil</div>
+    <div class="profile-grid">
+      <div>
+        <h2>Rigueur opérationnelle,<br>logique de systèmes</h2>
+        <p>
+          Formé à la conception des systèmes d'information (ISC Tshikapa) et certifié Excel Avancé &amp; Power BI,
+          je combine une approche analytique des données avec une expérience concrète de la gestion de magasin
+          et de la coordination fournisseurs dans le secteur de la distribution pharmaceutique.
+        </p>
+        <p style="margin-top:16px;">
+          Organisé, discret et intègre, j'interviens aussi bien sur la structuration de l'information
+          que sur le pilotage d'équipes pour atteindre des objectifs de performance mesurables.
+        </p>
+        <a class="project-link" href="#projets" style="margin-top:18px; display:inline-flex;">↓ Voir une réalisation concrète</a>
+      </div>
+      <div>
+        <ul class="skills-list">
+          <li><span>Bases de données</span>
+            <span class="dots">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span>
+            </span>
+          </li>
+          <li><span>Excel avancé / Power BI</span>
+            <span class="dots">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span>
+            </span>
+          </li>
+          <li><span>Gestion des stocks</span>
+            <span class="dots">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span>
+            </span>
+          </li>
+          <li><span>Coordination fournisseurs</span>
+            <span class="dots">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span>
+            </span>
+          </li>
+        </ul>
+
+        <div style="margin-top:28px;">
+          <div class="lang-row"><span>Français</span><span class="level">Langue officielle</span></div>
+          <div class="lang-row"><span>Anglais</span><span class="level">Courant</span></div>
+          <div class="lang-row"><span>Portugais</span><span class="level">Intermédiaire</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projets">
+  <div class="wrap">
+    <div class="eyebrow">Réalisation</div>
+    <h2>Projets</h2>
+
+    <div class="project">
+      <div>
+        <img src="assets/dashboard-projet.png" alt="Tableau de bord Excel de suivi de stock pour un dépôt pharmaceutique, avec indicateurs clés et graphiques">
+      </div>
+      <div>
+        <div class="project-tags">
+          <span class="tag">Excel</span>
+          <span class="tag">Formules SUMIFS / INDEX-MATCH</span>
+          <span class="tag">Mise en forme conditionnelle</span>
+          <span class="tag">Style Power BI</span>
+        </div>
+        <h3>Tableau de bord de suivi de stock — dépôt pharmaceutique</h3>
+        <p>
+          Modèle construit pour reproduire une problématique réelle de mon poste de Shop Manager :
+          détecter les ruptures avant qu'elles n'affectent le service client, et visualiser
+          la valeur du stock par catégorie de produits.
+        </p>
+        <div class="kpi-row">
+          <div class="kpi-card"><div class="val">83,3%</div><div class="lbl">Taux de service</div></div>
+          <div class="kpi-card"><div class="val">2</div><div class="lbl">Produits en rupture imminente</div></div>
+          <div class="kpi-card"><div class="val">$731,75</div><div class="lbl">Valeur totale du stock</div></div>
+          <div class="kpi-card"><div class="val">1,39</div><div class="lbl">Rotation moyenne</div></div>
+        </div>
+        <ul>
+          <li>Calcul automatique du stock final et détection des seuils critiques (formule <code>IF</code>)</li>
+          <li>Classement des produits par valeur avec <code>LARGE</code> / <code>INDEX</code> / <code>MATCH</code></li>
+          <li>Répartition de la valeur de stock par catégorie via <code>SUMIFS</code></li>
+          <li>Mise en forme conditionnelle pour repérer les ruptures en un coup d'œil</li>
+        </ul>
+        <div style="display:flex; gap:20px; flex-wrap:wrap;">
+          <a class="project-link" href="assets/suivi_stock_pharma.xlsx" download>↓ Télécharger le fichier Excel</a>
+          <a class="project-link" href="assets/suivi_stock_pharma.pdf" target="_blank" rel="noopener">↗ Aperçu PDF (sans Excel)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experiences">
+  <div class="wrap">
+    <div class="eyebrow">Parcours</div>
+    <h2>Expériences professionnelles</h2>
+
+    <div class="entry">
+      <div class="idx mono">01</div>
+      <div>
+        <div class="role-title">Shop Manager</div>
+        <div class="org">Shalina Healthcare Sarlu — Kimpese</div>
+        <ul>
+          <li>Supervision des opérations quotidiennes du magasin</li>
+          <li>Gestion des niveaux de stock, traitement des commandes et coordination avec les fournisseurs</li>
+          <li>Encadrement et animation de l'équipe pour atteindre les objectifs de performance</li>
+        </ul>
+      </div>
+      <div class="period mono">2024 — aujourd'hui</div>
+    </div>
+
+    <div class="entry">
+      <div class="idx mono">02</div>
+      <div>
+        <div class="role-title">Facturier</div>
+        <div class="org">Shalina Healthcare Sarlu — Tshikapa</div>
+        <ul>
+          <li>Établissement des factures clients et accompagnement à l'achat</li>
+          <li>Contribution au développement commercial de l'activité</li>
+        </ul>
+      </div>
+      <div class="period mono">2022 — 2024</div>
+    </div>
+
+    <div class="entry">
+      <div class="idx mono">03</div>
+      <div>
+        <div class="role-title">Chargé de l'informatique</div>
+        <div class="org">ONG BATID</div>
+        <ul>
+          <li>Suivi et évaluation du mouvement des agents pour une gestion efficace de l'information</li>
+        </ul>
+      </div>
+      <div class="period mono">2020 — 2021</div>
+    </div>
+  </div>
+</section>
+
+<section id="formations">
+  <div class="wrap">
+    <div class="eyebrow">Académique</div>
+    <h2>Formations &amp; certifications</h2>
+    <div class="edu">
+      <div class="edu-card">
+        <div class="period mono">2023 — 2024</div>
+        <h3>Licence en conception des systèmes d'information</h3>
+        <p>ISC Tshikapa</p>
+      </div>
+      <div class="edu-card">
+        <div class="period mono">2024</div>
+        <h3>Excel Avancé &amp; Power BI pour les entreprises</h3>
+        <p>Eureka Services</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="eyebrow" style="color:#8FBBAE;">Contact</div>
+    <h2>Discutons de votre prochain projet</h2>
+    <p class="lede">Disponible pour des missions en systèmes d'information, gestion opérationnelle ou analyse de données.</p>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <span class="k">Téléphone</span>
+        <a href="tel:+243972177613">+243 972 177 613</a><br>
+        <a href="tel:+243830578054">+243 830 578 054</a>
+      </div>
+      <div class="contact-card">
+        <span class="k">Email</span>
+        <a href="mailto:deogracekasonga@gmail.com">deogracekasonga@gmail.com</a>
+      </div>
+      <div class="contact-card">
+        <span class="k">Adresse</span>
+        58 Kimpese, Kongo Central, RDC
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2026 Deograce Kasonga</span>
+      <span class="mono">Informaticien — Systèmes d'information &amp; opérations</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
